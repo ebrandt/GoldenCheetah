@@ -368,6 +368,7 @@ void RealtimeWindow::Start()       // when start button is pressed
         setDeviceController();
         if (deviceController == NULL) return;
         else deviceController->start();          // start device
+        load_period.restart();
 
         // we're away!
         status |=RT_RUNNING;
@@ -445,6 +446,7 @@ void RealtimeWindow::Pause()        // pause capture to recalibrate
         metrics_timer->start(METRICSRATE);
         if (status & RT_STREAMING) stream_timer->start(STREAMRATE);
         if (status & RT_RECORDING) disk_timer->start(SAMPLERATE);
+        load_period.restart();
         if (status & RT_WORKOUT) load_timer->start(LOADRATE);
     } else {
         session_elapsed_msec += session_time.elapsed();
@@ -457,6 +459,7 @@ void RealtimeWindow::Pause()        // pause capture to recalibrate
         if (status & RT_STREAMING) stream_timer->stop();
         if (status & RT_RECORDING) disk_timer->stop();
         if (status & RT_WORKOUT) load_timer->stop();
+        load_msecs += load_period.restart();
     }
 }
 
@@ -850,7 +853,7 @@ void RealtimeWindow::loadUpdate()
 {
     long load;
     double gradient;
-    load_msecs += LOADRATE;
+    load_msecs += load_period.restart();
 
     if (deviceController == NULL) return;
 
