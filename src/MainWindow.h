@@ -66,6 +66,7 @@ class HomeWindow;
 class ICalendar;
 class CalDAV;
 class Seasons;
+class IntervalSummaryWindow;
 
 class MainWindow : public QMainWindow
 {
@@ -226,6 +227,7 @@ class MainWindow : public QMainWindow
         void selectAthlete();
 
         void showDock();
+
     protected:
 
         static QString notesFileName(QString rideFileName);
@@ -268,8 +270,9 @@ class MainWindow : public QMainWindow
         QSplitter *splitter;
         QSplitter *metaSplitter;
         QTreeWidget *treeWidget;
-        QSplitter *intervalsplitter;
+        QSplitter *intervalSplitter;
         QTreeWidget *intervalWidget;
+        IntervalSummaryWindow	*intervalSummaryWindow;
         QTabWidget *tabWidget;
         SummaryWindow *summaryWindow;
         DiaryWindow *diaryWindow;

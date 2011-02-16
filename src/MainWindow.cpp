@@ -84,6 +84,7 @@
 #include "WithingsDownload.h"
 #include "CalendarDownload.h"
 #include "WorkoutWizard.h"
+#include "IntervalSummaryWindow.h"
 
 #include "GcWindowTool.h"
 #ifdef GC_HAVE_SOAP
@@ -305,7 +306,10 @@ MainWindow::MainWindow(const QDir &home) :
     treeWidget->expandItem(allRides);
     treeWidget->setFirstItemColumnSpanned (allRides, true);
 
-    intervalWidget = new QTreeWidget(this);
+
+    intervalSummaryWindow = new IntervalSummaryWindow(this);
+
+    intervalWidget = new QTreeWidget();
     intervalWidget->setColumnCount(1);
     intervalWidget->setIndentation(5);
     intervalWidget->setSortingEnabled(false);
@@ -319,6 +323,11 @@ MainWindow::MainWindow(const QDir &home) :
     allIntervals = new QTreeWidgetItem(intervalWidget, FOLDER_TYPE);
     allIntervals->setText(0, tr("Intervals"));
     intervalWidget->expandItem(allIntervals);
+
+    intervalSplitter = new QSplitter(this);
+    intervalSplitter->setOrientation(Qt::Vertical);
+    intervalSplitter->addWidget(intervalWidget);
+    intervalSplitter->addWidget(intervalSummaryWindow);
 
 
 
@@ -403,7 +412,7 @@ MainWindow::MainWindow(const QDir &home) :
     dock->setWidget(toolBox);
 #endif
     toolBox->addItem(treeWidget, "Rides");
-    toolBox->addItem(intervalWidget, "Intervals");
+    toolBox->addItem(intervalSplitter, "Intervals");
     toolBox->addItem(masterControls, "Controls");
     toolBox->addItem(new AthleteTool(QFileInfo(home.path()).path(), this), "Athletes");
     toolBox->addItem(chartTool, "Charts");
