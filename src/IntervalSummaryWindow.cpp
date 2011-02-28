@@ -113,5 +113,3 @@ void IntervalSummaryWindow::calcInterval(IntervalItem* interval, QString& html)
     }
     html += "</table>";
 }
-
-

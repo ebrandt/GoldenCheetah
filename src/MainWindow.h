@@ -272,7 +272,7 @@ class MainWindow : public QMainWindow
         QTreeWidget *treeWidget;
         QSplitter *intervalSplitter;
         QTreeWidget *intervalWidget;
-        IntervalSummaryWindow	*intervalSummaryWindow;
+        IntervalSummaryWindow *intervalSummaryWindow;
         QTabWidget *tabWidget;
         SummaryWindow *summaryWindow;
         DiaryWindow *diaryWindow;

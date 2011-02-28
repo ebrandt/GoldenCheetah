@@ -46,6 +46,7 @@
 #include "RealtimeWindow.h"
 #include "RideItem.h"
 #include "IntervalItem.h"
+#include "IntervalSummaryWindow.h"
 #include "RideEditor.h"
 #ifdef GC_HAVE_ICAL
 #include "DiaryWindow.h"
@@ -306,9 +307,7 @@ MainWindow::MainWindow(const QDir &home) :
     treeWidget->expandItem(allRides);
     treeWidget->setFirstItemColumnSpanned (allRides, true);
 
-
     intervalSummaryWindow = new IntervalSummaryWindow(this);
-
     intervalWidget = new QTreeWidget();
     intervalWidget->setColumnCount(1);
     intervalWidget->setIndentation(5);
@@ -328,8 +327,6 @@ MainWindow::MainWindow(const QDir &home) :
     intervalSplitter->setOrientation(Qt::Vertical);
     intervalSplitter->addWidget(intervalWidget);
     intervalSplitter->addWidget(intervalSummaryWindow);
-
-
 
 #ifdef GC_HAVE_ICAL
     rideCalendar = new ICalendar(this); // my local/remote calendar entries
